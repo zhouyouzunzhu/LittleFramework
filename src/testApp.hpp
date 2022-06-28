@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "core/director.h"
+#include "core/Director.h"
 
 class TestApp : public App
 {

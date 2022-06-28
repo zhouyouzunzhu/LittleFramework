@@ -1,2 +1,2 @@
-﻿#include "appConfig.h"
+﻿#include "AppConfig.h"
 

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "app.h"
+#include "App.h"
 
 class _Director
 {

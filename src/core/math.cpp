@@ -1,4 +1,4 @@
-﻿#include "math.h"
+﻿#include "Math.h"
 #include <cmath>
 #include <cfloat>
 #include <cstdlib>

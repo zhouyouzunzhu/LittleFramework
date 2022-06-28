@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "def.h"
-#include "appConfig.h"
+#include "Def.h"
+#include "AppConfig.h"
 
 class App
 {

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
-#include "assetsAnalysis.h"
+#include "AssetsAnalysis.h"
+#include "AssetsWrappers.h"
 #include <unordered_map>
 
 
@@ -19,8 +20,8 @@ public:
     // 注册资产解析器
     void regAnlysis(AssetsAnalysis* analysis);
 
-    // 加载资产
-    template<typename AssetsType>
+    // 加载资产(原始资产)
+    template<typename AssetsType = AssetsCell>
     AssetsType* load(const String& resPath){
         AssetsCell* cell = nullptr;
         auto it = this->_assetsCellDict.find(resPath);
@@ -37,8 +38,8 @@ public:
         return dynamic_cast<AssetsType*>(cell);
     }
 
-    // 卸载资产
-    template<typename AssetsType>
+    // 卸载资产(原始资产)
+    template<typename AssetsType = AssetsCell>
     void unload(AssetsType* obj){
         if(obj == nullptr)
             return;
@@ -54,5 +55,14 @@ public:
                 this->_assetsCellDict.erase(it);
             }
         }
+    }
+
+    // 获取包装资产(可由外部自由delete)
+    template<typename AssetsType = AssetsWrappers>
+    AssetsType* getObj(const String& resPath){
+        AssetsCell* cell = this->load(resPath);
+        if(cell == nullptr)
+            return nullptr;
+        return new AssetsType(this, cell);
     }
 };

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "mstr.h"
+#include "String.h"
 
 // 单例模板辅助
 template<typename Type>

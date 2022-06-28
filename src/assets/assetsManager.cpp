@@ -1,11 +1,14 @@
-﻿#include "assetsManager.h"
+﻿#include "AssetsManager.h"
 
 
 AssetsCell* AssetsManager::tryLoad(const String& resPath)
 {
     int index = resPath.rfind(".");
     if(index <= 0)
+    {
+        pWarning(u8"不支持无后缀的资产! %s", resPath.data());
         return nullptr;
+    }
 
     String suffix = resPath.substr(index + 1);
     auto it = this->_analysisDict.find(suffix);
@@ -18,8 +21,10 @@ AssetsCell* AssetsManager::tryLoad(const String& resPath)
             cell->resPath = resPath;
             cell->type = suffix;
             return cell;
-        }
-    }
+        }else
+            pWarning(u8"资产解析失败! %s", resPath.data());
+    }else
+        pWarning(u8"没有找到合适的资产解析器! %s", resPath.data());
 
     return nullptr;
 }
