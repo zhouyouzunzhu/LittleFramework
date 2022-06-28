@@ -14,8 +14,6 @@ private:
 public:
     int run(App* app);
 
-    void putLog(const String& info);
-
     template<typename AppType>
     AppType* getApp(){
         if(this->_instanceApp != nullptr)
@@ -24,11 +22,4 @@ public:
     }
 };
 #define Director Inst(_Director)
-
-
-#define pLog(info, ...)                                                                    \
-	do                                                                                     \
-	{                                                                                      \
-		Director->putLog(String("%s:%d: {0}", __FILE__, __LINE__).arg(String((info), ##__VA_ARGS__)));      \
-	} while (0)
 

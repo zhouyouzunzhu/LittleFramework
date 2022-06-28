@@ -7,7 +7,7 @@ class App
     friend class _Director;
 
 private:
-    ExitCode _exitCode;
+    ExitCode _exitCode = ExitCode::Normal;
     AppConfig* _appConfig = nullptr;
     bool _isFrameworkInited = false;
     bool _isRunning = false;

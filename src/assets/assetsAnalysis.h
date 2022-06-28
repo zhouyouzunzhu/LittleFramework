@@ -13,7 +13,7 @@ public:
     virtual AssetsCell* loadFromFile(const String& file);
 
     // 卸载资源
-    virtual bool unloadAssetes(AssetsCell* cell);
+    virtual void unloadAssetes(AssetsCell* cell);
 
     // 获取支持解析的文件后缀
     virtual const std::vector<String>& getSupportAnalysisType() = 0;

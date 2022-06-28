@@ -6,9 +6,8 @@ AssetsCell* AssetsAnalysis::loadFromFile(const String& file)
     return nullptr;
 }
 
-bool AssetsAnalysis::unloadAssetes(AssetsCell* cell)
+void AssetsAnalysis::unloadAssetes(AssetsCell* cell)
 {
-    return true;
 }
 
 const std::vector<String>& AssetsAnalysis::getSupportAnalysisType()

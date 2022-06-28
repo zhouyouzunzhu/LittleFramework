@@ -17,8 +17,3 @@ int _Director::run(App* app)
 
     return exitCode;
 }
-
-void _Director::putLog(const String& info)
-{
-    ::puts(info.data());
-}

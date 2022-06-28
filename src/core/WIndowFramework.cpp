@@ -29,7 +29,10 @@ bool _WindowFramework::initGL()
     // Setup window
     glfwSetErrorCallback(CallbackError);
     if (!glfwInit())
+    {
+        pErr(u8"glfw初始化失败");
         return false;
+    }
 
 #if defined(__APPLE__)
     // GL 3.2 + GLSL 150
@@ -51,7 +54,10 @@ bool _WindowFramework::initGL()
     int hight = (int)(this->_config->size.y);
     GLFWwindow* window = glfwCreateWindow(width, hight, this->_config->title.data(), NULL, NULL);
     if (window == NULL)
+    {
+        pErr(u8"glfw初始化失败");
         return false;
+    }
     glfwMakeContextCurrent(window);
 
     // 垂直同步
@@ -60,6 +66,7 @@ bool _WindowFramework::initGL()
     // glad
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
+        pErr(u8"glad加载失败");
         glfwDestroyWindow(window);
         return false;
     }
