@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // pi
 #define Math_PI 3.1415926f

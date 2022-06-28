@@ -51,5 +51,6 @@ target("glad")
 
 target("App")
 	set_kind("binary")
+	add_includedirs("src")
 	add_files("src/**.cpp")
 	add_deps("glad")

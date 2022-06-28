@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "mstr.h"
 
@@ -19,11 +19,8 @@ struct _InstanceTemplate {
 #define Inst(Type) (_InstanceTemplate<Type>::getInstance())
 
 
-// 错误退出代码
 enum ExitCode
 {
     Normal = 0,
-    InitError = 1,
+    InitError = 1
 };
-
-

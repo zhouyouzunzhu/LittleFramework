@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "assetsAnalysis.h"
 #include <unordered_map>
@@ -38,18 +38,20 @@ public:
     }
 
     // 卸载资产
-    // template<typename AssetsType>
-    void unload(AssetsCell* obj){
+    template<typename AssetsType>
+    void unload(AssetsType* obj){
         if(obj == nullptr)
-            return
+            return;
         
         const String& resPath = obj->resPath;
-        auto it = this->_assetsCellDict->find(resPath);
+        auto it = this->_assetsCellDict.find(resPath);
         if(it != this->_assetsCellDict.end())
         {
             --(it->second->refCount);
             if(it->second->refCount == 0)
             {
+                this->tryUnload(it->second);
+                this->_assetsCellDict.erase(it);
             }
         }
     }

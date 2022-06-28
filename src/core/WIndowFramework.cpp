@@ -1,4 +1,4 @@
-#include "WindowFramework.h"
+﻿#include "WindowFramework.h"
 
 
 void CallbackError(int errorCode, const char* errorStr)

@@ -1,4 +1,4 @@
-#include "director.h"
+﻿#include "director.h"
 #include <iostream>
 
 int _Director::run(App* app)
