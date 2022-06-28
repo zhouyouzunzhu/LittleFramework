@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+
+# 构建相关
+/build/
+.xmake
+
+# mac
+.DS_Store
+*/.DS_Store
+
+# IDE相关
+.vscode
