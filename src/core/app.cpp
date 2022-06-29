@@ -1,6 +1,6 @@
 ﻿#include "App.h"
 #include "WindowFramework.h"
-
+#include "assets/AssetsManager.h"
 
 void App::exit(ExitCode code)
 {
@@ -18,6 +18,13 @@ void App::realInit()
 
     this->initFramework();
     this->_isRunning = this->_isFrameworkInited;
+
+    // 创建默认管理器
+    if(this->assets == nullptr)
+        this->assets = AssetsManager::CreateDefaultManager();
+
+    if(this->_isFrameworkInited)
+        this->onStart();
 }
 
 void App::realLoop()
@@ -40,6 +47,14 @@ void App::realExit()
 
     if(this->_appConfig != nullptr)
         delete this->_appConfig;
+
+    // app的资产管理需要在框架结束前调用清理
+    if(this->assets != nullptr)
+    {
+        this->assets->clearAssets();
+        this->assets->clearAnlysis();
+        this->assets = nullptr;
+    }
 
     this->quitFramework();
 }
@@ -75,6 +90,11 @@ void App::setAppConfig(AppConfig* config)
 }
 
 void App::onInit()
+{
+
+}
+
+void App::onStart()
 {
 
 }

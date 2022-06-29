@@ -2,16 +2,8 @@
 
 AssetsManager::~AssetsManager()
 {
-    // 移除所有解析器
-    for(auto& it : this->_analysisList)
-        delete it;
-    this->_analysisList.clear();
-    this->_analysisDict.clear();
-
-    // 释放所有资源
-    for(auto& it : this->_assetsCellDict)
-        this->tryUnload(it.second);
-    this->_assetsCellDict.clear();
+    this->clearAnlysis();
+    this->clearAssets();
 }
 
 AssetsCell* AssetsManager::tryLoad(const String& resPath)
@@ -70,4 +62,21 @@ void AssetsManager::regAnlysis(AssetsAnalysis* analysis)
         }
     }
     this->_analysisList.push_back(analysis);
+}
+
+void AssetsManager::clearAssets()
+{
+    // 释放所有资源
+    for(auto& it : this->_assetsCellDict)
+        this->tryUnload(it.second);
+    this->_assetsCellDict.clear();
+}
+
+void AssetsManager::clearAnlysis()
+{
+    // 移除所有解析器
+    for(auto& it : this->_analysisList)
+        delete it;
+    this->_analysisList.clear();
+    this->_analysisDict.clear();
 }

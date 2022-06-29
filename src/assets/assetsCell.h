@@ -13,4 +13,6 @@ private:
     String resPath;        // 资产路径
 public:
     virtual ~AssetsCell();  // 保证有个多态表
+
+    const String& getResPath()const;    // 获取资产路径
 };

@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "String.h"
+#include "Math.h"
+#include <glad/glad.h>
 
 // 单例模板辅助
 template<typename Type>

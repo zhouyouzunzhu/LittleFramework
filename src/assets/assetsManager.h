@@ -17,6 +17,17 @@ private:
     AssetsCell* tryLoad(const String& resPath);
     void tryUnload(AssetsCell* cell);
 
+
+
+private:
+    friend class App;
+    // 清理资产
+    void clearAssets();
+
+    // 清理解释器
+    void clearAnlysis();
+
+
 public:
     virtual ~AssetsManager();
 
@@ -70,4 +81,8 @@ public:
         obj->initWrappers(this, cell);
         return obj;
     }
+
+
+    // 创建默认管理器
+    static AssetsManager* CreateDefaultManager();
 };

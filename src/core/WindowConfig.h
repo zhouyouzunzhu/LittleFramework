@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "Def.h"
-#include "Math.h"
 
 class WindowConfig
 {
