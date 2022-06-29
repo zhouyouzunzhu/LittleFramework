@@ -7,7 +7,21 @@ AnalysisCsv::AnalysisCsv()
 {
 }
 
-AssetsCell* AnalysisCsv::loadFromFile(const String& filePath)
+AssetsCell* AnalysisCsv::loadFromFile(const String& filePath, const String& type)
+{
+    if(type == "csv")
+        return this->loadSrcCsv(filePath);
+    
+    return nullptr;
+}
+
+void AnalysisCsv::unloadAssetes(AssetsCell* cell)
+{
+    if(cell != nullptr)
+        delete cell;
+}
+
+AssetsCell* AnalysisCsv::loadSrcCsv(const String& filePath)
 {
     std::ifstream file;
     file.open(filePath.data());
@@ -46,10 +60,4 @@ AssetsCell* AnalysisCsv::loadFromFile(const String& filePath)
         return cell;
     }
     return nullptr;
-}
-
-void AnalysisCsv::unloadAssetes(AssetsCell* cell)
-{
-    if(cell != nullptr)
-        delete cell;
 }

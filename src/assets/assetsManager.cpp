@@ -28,7 +28,7 @@ AssetsCell* AssetsManager::tryLoad(const String& resPath)
     if(it != this->_analysisDict.end())
     {
         AssetsAnalysis* analysis = it->second;
-        AssetsCell* cell = analysis->loadFromFile(resPath);
+        AssetsCell* cell = analysis->loadFromFile(resPath, suffix);
         if(cell != nullptr)
         {
             cell->resPath = resPath;

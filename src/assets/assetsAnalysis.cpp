@@ -29,7 +29,7 @@ AssetsAnalysis::~AssetsAnalysis()
 {
 }
 
-AssetsCell* AssetsAnalysis::loadFromFile(const String& file)
+AssetsCell* AssetsAnalysis::loadFromFile(const String& file, const String& type)
 {
     return nullptr;
 }

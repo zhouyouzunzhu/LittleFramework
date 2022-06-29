@@ -20,7 +20,7 @@ public:
     virtual ~AssetsAnalysis();
 
     // 从文件加载
-    virtual AssetsCell* loadFromFile(const String& filePath) = 0;
+    virtual AssetsCell* loadFromFile(const String& filePath, const String& type) = 0;
 
     // 卸载资源
     virtual void unloadAssetes(AssetsCell* cell) = 0;
