@@ -2,6 +2,8 @@
 
 #include "AssetsCell.h"
 
+class AssetsManager;
+
 // 资产包装器(通常使用包装后的资产)
 class AssetsWrappers
 {
