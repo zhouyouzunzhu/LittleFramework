@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "Inst.h"
+
 // pi
 #define Math_PI 3.1415926f
 #define Math_2PI 6.2831852f
@@ -21,6 +23,38 @@ class Vec2;
 class Mat3;
 class Rect;
 class Color;
+
+namespace Easing
+{
+    enum Type
+    {
+        linear,
+        outQuad,
+        outCubic,
+        outQuart,
+        outQuint,
+        inOutQuad,
+        inOutCubic,
+        inOutQuart,
+        inOutQuint,
+        inQuad,
+        inCubic,
+        inQuart,
+        inQuint,
+        inSine,
+        outSine,
+        inOutSine,
+        inExpo,
+        outExpo,
+        inOutExpo,
+        inCirc,
+        outCirc,
+        inOutCirc,
+        inElastic,
+        outElastic,
+        Count
+    };
+}
 
 class Vec2
 {
@@ -192,3 +226,66 @@ public:
 public:
     float r, g, b, a;
 };
+
+
+class _Math
+{
+private:
+    InstClass(_Math) { init(); }
+    void init();
+
+public:
+    // 矩阵计算
+    Mat3 ortho(const Vec2& size);
+    Mat3 ortho(const Rect& area);
+    Mat3 translate(const Vec2& offset);
+    Mat3 translate(const Mat3& mat, const Vec2& offset);
+    Mat3 rotate(float angle);
+    Mat3 rotate(const Mat3& mat, float angle);
+    Mat3 rotateX(float angle);
+    Mat3 rotateX(const Mat3& mat, float angle);
+    Mat3 rotateY(float angle);
+    Mat3 rotateY(const Mat3& mat, float angle);
+    Mat3 scale(const Vec2& v);
+    Mat3 scale(const Mat3& mat, const Vec2& offset);
+    Mat3 transform(const Vec2& pos, const Vec2& scale, float angle);
+    Mat3 complexTrans(const Mat3& mat, const Vec2& size, const Vec2& anchor);
+
+    // 缓动函数
+    float easing(float value, const Easing::Type& type);
+    float linear(float begin, float end, float v);
+    Vec2 linear(const Vec2& begin, const Vec2& end, float v);
+
+    // 贝塞尔
+    Vec2 bezier(float t, const Vec2& p1, const Vec2& p2, const Vec2& p3);
+    Vec2 bezier(float t, const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4);
+
+    // 弧形
+    Vec2 circle(float t, const Vec2& c, float r, float fr, float rd);
+
+    // 随机数
+    float random();
+    float random(float min, float max);
+    Vec2 randomVec2(const Vec2& min = Vec2(0.0f), const Vec2& max = Vec2(1.0f));
+    Color randomColor(const Color& min = Color(0x000000FF), const Color& max = Color(0xFFFFFFFF));
+
+    // 区间映射
+    float map(float target, float begin, float end, float tbegin, float tend);
+    Vec2 map(const Vec2& target, const Vec2& begin, const Vec2& end, const Vec2& tbegin, const Vec2& tend);
+
+    // 获取角度的方向向量
+    Vec2 dirVec(float angle);
+
+    // 角度转弧度  弧度转角度
+    float angleToRadian(float num);
+    float radianToAngle(float num);
+
+    // 角度限制 范围限制
+    float range(float angle);
+    float range(float min, float max, float v);
+
+private:
+    typedef float (*InchingFunc)(float);
+    InchingFunc easings[Easing::Type::Count];
+};
+#define Math Inst(_Math)

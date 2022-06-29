@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "Def.h"
 #include "AppConfig.h"
 #include "assets/AssetsManager.h"
 

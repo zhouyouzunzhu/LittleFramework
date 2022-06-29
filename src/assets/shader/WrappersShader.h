@@ -33,5 +33,6 @@ public:
 
     // 扩展
     WrappersShader* set(const String& name, const Vec2& v);
+    WrappersShader* set(const String& name, Mat3& v, bool trans = false);
     WrappersShader* set(const String& name, const Color& v);
 };

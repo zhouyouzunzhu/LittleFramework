@@ -132,6 +132,16 @@ WrappersShader* WrappersShader::set(const String& name, double v1, double v2, do
     return this;
 }
 
+WrappersShader* WrappersShader::set(const String& name, Mat3& v, bool trans)
+{
+    int location = glGetUniformLocation(this->_data->_id, name.data());
+    if(location == -1)
+        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
+    else
+        glUniformMatrix3fv(location, 1, (trans ? GL_TRUE : GL_FALSE), &(v[0][0]));
+    return this;
+}
+
 WrappersShader* WrappersShader::set(const String& name, const Vec2& v)
 {
     return this->set(name, v.x, v.y);

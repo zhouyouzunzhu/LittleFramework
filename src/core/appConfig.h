@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "Def.h"
 #include "WindowConfig.h"
 
 class AppConfig
