@@ -31,5 +31,7 @@ public:
 
     bool isInited();
     bool isShouldClose();
+
+    double getTime()const;
 };
 #define Framework Inst(_WindowFramework)

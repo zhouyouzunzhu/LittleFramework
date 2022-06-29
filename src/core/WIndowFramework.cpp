@@ -157,3 +157,8 @@ bool _WindowFramework::isShouldClose()
 {
     return glfwWindowShouldClose(this->_window);
 }
+
+double _WindowFramework::getTime()const
+{
+    return glfwGetTime();
+}

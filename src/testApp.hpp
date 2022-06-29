@@ -4,6 +4,8 @@
 
 #include "assets/shader/WrappersShader.h"
 
+#include "core/WindowFramework.h"
+
 class TestApp : public App
 {
 protected:
@@ -53,8 +55,11 @@ protected:
         shader->set("projection", projection);
 
 
-        auto model = Math->transform(Vec2(200.0f, 200.0f), Vec2(200.0f, 200.0f), 30.0f);
+        auto model = Math->transform(Vec2(200.0f, 200.0f), Vec2(200.0f, 200.0f), 0.0f);
         shader->set("model", model);
+
+        shader->set("time", Framework->getTime());
+
 
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
