@@ -1,7 +1,7 @@
 ﻿#include "AssetsWrappers.h"
 #include "AssetsManager.h"
 
-AssetsWrappers::AssetsWrappers(AssetsManager* from, AssetsCell* cell)
+void AssetsWrappers::initWrappers(AssetsManager* from, AssetsCell* cell)
 {
     this->_from = from;
     this->_cell = cell;

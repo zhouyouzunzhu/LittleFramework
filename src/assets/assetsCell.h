@@ -11,4 +11,6 @@ private:
     int refCount = 0;      // 一个简单的引用计数
     String type;           // 资产类型
     String resPath;        // 资产路径
+public:
+    virtual ~AssetsCell();  // 保证有个多态表
 };

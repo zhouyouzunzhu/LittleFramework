@@ -1,5 +1,18 @@
 ﻿#include "AssetsManager.h"
 
+AssetsManager::~AssetsManager()
+{
+    // 移除所有解析器
+    for(auto& it : this->_analysisList)
+        delete it;
+    this->_analysisList.clear();
+    this->_analysisDict.clear();
+
+    // 释放所有资源
+    for(auto& it : this->_assetsCellDict)
+        this->tryUnload(it.second);
+    this->_assetsCellDict.clear();
+}
 
 AssetsCell* AssetsManager::tryLoad(const String& resPath)
 {
@@ -24,7 +37,7 @@ AssetsCell* AssetsManager::tryLoad(const String& resPath)
         }else
             pWarning(u8"资产解析失败! %s", resPath.data());
     }else
-        pWarning(u8"没有找到合适的资产解析器! %s", resPath.data());
+        pWarning(u8"没有找到合适的资产解析器! %s %s", suffix.data(), resPath.data());
 
     return nullptr;
 }
@@ -56,4 +69,5 @@ void AssetsManager::regAnlysis(AssetsAnalysis* analysis)
                 pWarning(u8"重复的资源解析器 %s", it.data());
         }
     }
+    this->_analysisList.push_back(analysis);
 }

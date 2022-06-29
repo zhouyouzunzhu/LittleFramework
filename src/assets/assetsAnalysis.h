@@ -13,10 +13,14 @@ private:
 protected:
     AssetsAnalysis(const String& supporTypes);
 
+    // 从文件中读取所有文本
+    bool readAllTextFromFile(const String& filePath, String& out);
+
 public:
+    virtual ~AssetsAnalysis();
 
     // 从文件加载
-    virtual AssetsCell* loadFromFile(const String& file) = 0;
+    virtual AssetsCell* loadFromFile(const String& filePath) = 0;
 
     // 卸载资源
     virtual void unloadAssetes(AssetsCell* cell) = 0;

@@ -13,11 +13,12 @@ private:
     AssetsManager* _from = nullptr;
 
 private:
-    AssetsWrappers(AssetsManager* from, AssetsCell* cell);
+    void initWrappers(AssetsManager* from, AssetsCell* cell);
 
 public:
     virtual ~AssetsWrappers();
 
 protected:
+    AssetsWrappers() = default;
     virtual void onWrappers(AssetsCell* cell) = 0;  // 资产包装
 };

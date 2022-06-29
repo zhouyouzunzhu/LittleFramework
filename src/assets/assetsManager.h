@@ -3,13 +3,14 @@
 #include "AssetsAnalysis.h"
 #include "AssetsWrappers.h"
 #include <unordered_map>
-
+#include <vector>
 
 // 资产管理器
 class AssetsManager
 {
 private:
-    std::unordered_map<String, AssetsAnalysis*> _analysisDict;  // 解析器表
+    std::vector<AssetsAnalysis*> _analysisList;                 // 解析器列表
+    std::unordered_map<String, AssetsAnalysis*> _analysisDict;  // 解析器查询表
     std::unordered_map<String, AssetsCell*> _assetsCellDict;    // 资产表
 
 private:
@@ -17,6 +18,8 @@ private:
     void tryUnload(AssetsCell* cell);
 
 public:
+    virtual ~AssetsManager();
+
     // 注册资产解析器
     void regAnlysis(AssetsAnalysis* analysis);
 
@@ -63,6 +66,8 @@ public:
         AssetsCell* cell = this->load(resPath);
         if(cell == nullptr)
             return nullptr;
-        return new AssetsType(this, cell);
+        AssetsType* obj = new AssetsType();
+        obj->initWrappers(this, cell);
+        return obj;
     }
 };
