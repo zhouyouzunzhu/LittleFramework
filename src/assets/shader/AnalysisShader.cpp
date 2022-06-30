@@ -21,8 +21,8 @@ void AnalysisShader::unloadAssetes(AssetsCell* cell)
     if(cell != nullptr)
     {
         CellShader* shaderCell = dynamic_cast<CellShader*>(cell);
-        if(shaderCell->_id > 0)
-            glDeleteProgram(shaderCell->_id);
+        if(shaderCell->id > 0)
+            glDeleteProgram(shaderCell->id);
         delete cell;
     }
 }
@@ -60,7 +60,7 @@ AssetsCell* AnalysisShader::loadSrcShader(const String& filePath)
     if(program > 0)
     {
         CellShader* cell = new CellShader();
-        cell->_id = program;
+        cell->id = program;
         return cell;
     }
 

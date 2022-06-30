@@ -43,15 +43,15 @@ AssetsCell* AnalysisCsv::loadSrcCsv(const String& filePath)
                     it.trim();
                     if(!it.isEmpty())
                     {
-                        cell->_header.emplace_back(it);
+                        cell->header.emplace_back(it);
                     }
                 }
             }else
             {
-                CellCsv::LineItem& lineItem = cell->_datas.emplace_back();
-                for(size_t i = 0; i < cell->_header.size() && i < items.size(); ++i)
+                CellCsv::LineItem& lineItem = cell->datas.emplace_back();
+                for(size_t i = 0; i < cell->header.size() && i < items.size(); ++i)
                 {
-                    lineItem[cell->_header[i]] = items[i].trim(); 
+                    lineItem[cell->header[i]] = items[i].trim(); 
                 }
             }
         }

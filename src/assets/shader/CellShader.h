@@ -5,6 +5,6 @@
 class CellShader : public AssetsCell
 {
 public:
-    unsigned int _id;   // programId
+    unsigned int id;   // programId
 };
 

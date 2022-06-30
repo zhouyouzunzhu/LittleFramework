@@ -12,9 +12,9 @@ public:
     
 public:
     // 数据头
-    std::vector<String> _header;
+    std::vector<String> header;
 
     // 所有数据
-    std::vector<LineItem> _datas;
+    std::vector<LineItem> datas;
 };
 
