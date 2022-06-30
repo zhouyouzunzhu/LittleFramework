@@ -6,14 +6,11 @@
 
 class CellCsv : public AssetsCell
 {
-    friend class AnalysisCsv;
-    friend class Csv;
-
 public:
     // 一行数据
     typedef std::unordered_map<String, String> LineItem;
     
-private:
+public:
     // 数据头
     std::vector<String> _header;
 
