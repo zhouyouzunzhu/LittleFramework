@@ -23,7 +23,7 @@ void AnalysisShader::unloadAssetes(AssetsCell* cell)
         CellShader* shaderCell = dynamic_cast<CellShader*>(cell);
         if(shaderCell->id > 0)
             glDeleteProgram(shaderCell->id);
-        delete cell;
+        delete shaderCell;
     }
 }
 
