@@ -36,7 +36,7 @@ void AnalysisImage::unloadAssetes(AssetsCell* cell)
 AssetsCell* AnalysisImage::loadSrcImageByFile(const String& filePath)
 {
     CellImage* image = new CellImage;
-    if (image->data = stbi_load(filePath.data(), &image->width, &image->height, &image->component, 4))
+    if (image->data = stbi_load(filePath.data(), &image->width, &image->height, &image->component, 0))
     {
 		return image;
 	}

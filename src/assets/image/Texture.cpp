@@ -14,8 +14,7 @@ int Texture::getTexFormat()const
     {
         switch (this->_data->component)
         {
-        case 1: out = GL_LUMINANCE; break;
-        case 2: out = GL_LUMINANCE_ALPHA; break;
+        case 1: out = GL_RED; break;
         case 3: out = GL_RGB; break;
         case 4: out = GL_RGBA; break;
         }
