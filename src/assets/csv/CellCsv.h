@@ -7,7 +7,7 @@
 class CellCsv : public AssetsCell
 {
     friend class AnalysisCsv;
-    friend class WrappersCsv;
+    friend class Csv;
 
 public:
     // 一行数据

@@ -1,14 +1,14 @@
-﻿#include "WrappersCsv.h"
+﻿#include "Csv.h"
 #include <algorithm>
 
-void WrappersCsv::onWrappers(AssetsCell* cell)
+void Csv::onWrappers(AssetsCell* cell)
 {
     this->_data = dynamic_cast<CellCsv*>(cell);
     this->_mainKey = u8"ID";
     this->rebuildMainKey();
 }
 
-void WrappersCsv::rebuildMainKey()
+void Csv::rebuildMainKey()
 {
     this->_mainKeyDatas.clear();
 
@@ -42,13 +42,13 @@ void WrappersCsv::rebuildMainKey()
 }
 
 // 获取数据行数
-size_t WrappersCsv::getCount()const
+size_t Csv::getCount()const
 {
     return this->_data->_datas.size();
 }
 
 // 通过行数获取数据
-const CellCsv::LineItem* WrappersCsv::getData(int index)
+const CellCsv::LineItem* Csv::getData(int index)
 {
     if(index >= this->_data->_datas.size())
         return nullptr;
@@ -56,7 +56,7 @@ const CellCsv::LineItem* WrappersCsv::getData(int index)
 }
 
 // 通过主键获取数据组的第一个数据
-const CellCsv::LineItem* WrappersCsv::getData(const String& key)
+const CellCsv::LineItem* Csv::getData(const String& key)
 {
     auto it = this->_mainKeyDatas.find(key);
     if(it == this->_mainKeyDatas.end())
@@ -68,7 +68,7 @@ const CellCsv::LineItem* WrappersCsv::getData(const String& key)
     return it->second.front();
 }
 
-const WrappersCsv::LineItems* WrappersCsv::getDatas(const String& key)
+const Csv::LineItems* Csv::getDatas(const String& key)
 {
     auto it = this->_mainKeyDatas.find(key);
     if(it == this->_mainKeyDatas.end())
@@ -77,13 +77,13 @@ const WrappersCsv::LineItems* WrappersCsv::getDatas(const String& key)
     return &it->second;
 }
 
-const std::vector<String>& WrappersCsv::getHeader()const
+const std::vector<String>& Csv::getHeader()const
 {
     return this->_data->_header;
 }
 
 // 设置主键
-void WrappersCsv::setMainKey(const String& key)
+void Csv::setMainKey(const String& key)
 {
     this->_mainKey = key;
     this->rebuildMainKey();

@@ -1,18 +1,18 @@
-﻿#include "WrappersShader.h"
+﻿#include "Shader.h"
 
-void WrappersShader::onWrappers(AssetsCell* cell)
+void Shader::onWrappers(AssetsCell* cell)
 {
     this->_data = dynamic_cast<CellShader*>(cell);
 }
 
-WrappersShader* WrappersShader::use()
+Shader* Shader::use()
 {
     if(this->_data->_id > 0)
         glUseProgram(this->_data->_id);
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, int v1)
+Shader* Shader::set(const String& name, int v1)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -22,7 +22,7 @@ WrappersShader* WrappersShader::set(const String& name, int v1)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, float v1)
+Shader* Shader::set(const String& name, float v1)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -32,7 +32,7 @@ WrappersShader* WrappersShader::set(const String& name, float v1)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, double v1)
+Shader* Shader::set(const String& name, double v1)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -42,7 +42,7 @@ WrappersShader* WrappersShader::set(const String& name, double v1)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, int v1, int v2)
+Shader* Shader::set(const String& name, int v1, int v2)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -52,7 +52,7 @@ WrappersShader* WrappersShader::set(const String& name, int v1, int v2)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, float v1, float v2)
+Shader* Shader::set(const String& name, float v1, float v2)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -62,7 +62,7 @@ WrappersShader* WrappersShader::set(const String& name, float v1, float v2)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, double v1, double v2)
+Shader* Shader::set(const String& name, double v1, double v2)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -72,7 +72,7 @@ WrappersShader* WrappersShader::set(const String& name, double v1, double v2)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, int v1, int v2, int v3)
+Shader* Shader::set(const String& name, int v1, int v2, int v3)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -82,7 +82,7 @@ WrappersShader* WrappersShader::set(const String& name, int v1, int v2, int v3)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, float v1, float v2, float v3)
+Shader* Shader::set(const String& name, float v1, float v2, float v3)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -92,7 +92,7 @@ WrappersShader* WrappersShader::set(const String& name, float v1, float v2, floa
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, double v1, double v2, double v3)
+Shader* Shader::set(const String& name, double v1, double v2, double v3)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -102,7 +102,7 @@ WrappersShader* WrappersShader::set(const String& name, double v1, double v2, do
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, int v1, int v2, int v3, int v4)
+Shader* Shader::set(const String& name, int v1, int v2, int v3, int v4)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -112,7 +112,7 @@ WrappersShader* WrappersShader::set(const String& name, int v1, int v2, int v3, 
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, float v1, float v2, float v3, float v4)
+Shader* Shader::set(const String& name, float v1, float v2, float v3, float v4)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -122,7 +122,7 @@ WrappersShader* WrappersShader::set(const String& name, float v1, float v2, floa
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, double v1, double v2, double v3, double v4)
+Shader* Shader::set(const String& name, double v1, double v2, double v3, double v4)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -132,7 +132,7 @@ WrappersShader* WrappersShader::set(const String& name, double v1, double v2, do
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, Mat3& v, bool trans)
+Shader* Shader::set(const String& name, Mat3& v, bool trans)
 {
     int location = glGetUniformLocation(this->_data->_id, name.data());
     if(location == -1)
@@ -142,12 +142,12 @@ WrappersShader* WrappersShader::set(const String& name, Mat3& v, bool trans)
     return this;
 }
 
-WrappersShader* WrappersShader::set(const String& name, const Vec2& v)
+Shader* Shader::set(const String& name, const Vec2& v)
 {
     return this->set(name, v.x, v.y);
 }
 
-WrappersShader* WrappersShader::set(const String& name, const Color& v)
+Shader* Shader::set(const String& name, const Color& v)
 {
     return this->set(name, v.r, v.g, v.b, v.a);
 }

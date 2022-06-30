@@ -2,7 +2,7 @@
 
 #include "core/Director.h"
 
-#include "assets/shader/WrappersShader.h"
+#include "assets/shader/Shader.h"
 
 #include "core/WindowFramework.h"
 
@@ -10,11 +10,11 @@ class TestApp : public App
 {
 protected:
     unsigned int VAO;
-    WrappersShader* shader;
+    Shader* shader;
     Mat3 projection;
 
     virtual void onStart(){
-        shader = assets->getObj<WrappersShader>(u8"res/shaders/test.shader");
+        shader = assets->getObj<Shader>(u8"res/shaders/test.shader");
         if(shader != nullptr)
             pLog("loaded!!");
 

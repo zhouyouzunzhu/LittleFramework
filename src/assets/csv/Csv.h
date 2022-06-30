@@ -4,7 +4,7 @@
 #include "CellCsv.h"
 #include <unordered_map>
 
-class WrappersCsv : public AssetsWrappers
+class Csv : public AssetsWrappers
 {
 protected:
     virtual void onWrappers(AssetsCell* cell);
@@ -31,7 +31,7 @@ public:
     const CellCsv::LineItem* getData(const String& key);
 
     // 通过主键获取数据组
-    const WrappersCsv::LineItems* getDatas(const String& key);
+    const Csv::LineItems* getDatas(const String& key);
 
     // 获取表头
     const std::vector<String>& getHeader()const;
