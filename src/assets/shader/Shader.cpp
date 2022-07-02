@@ -5,149 +5,109 @@ void Shader::onWrappers(AssetsCell* cell)
     this->_data = dynamic_cast<CellShader*>(cell);
 }
 
-Shader* Shader::use()
+void Shader::active()
 {
     if(this->_data->id > 0)
         glUseProgram(this->_data->id);
-    return this;
 }
 
-Shader* Shader::set(const String& name, int v1)
+void Shader::set(const char* name, int v1)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform1i(location, v1);
-    return this;
 }
 
-Shader* Shader::set(const String& name, float v1)
+void Shader::set(const char* name, float v1)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform1f(location, v1);
-    return this;
 }
 
-Shader* Shader::set(const String& name, double v1)
+void Shader::set(const char* name, double v1)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform1f(location, v1);
-    return this;
 }
 
-Shader* Shader::set(const String& name, int v1, int v2)
+void Shader::set(const char* name, int v1, int v2)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform2i(location, v1, v2);
-    return this;
 }
 
-Shader* Shader::set(const String& name, float v1, float v2)
+void Shader::set(const char* name, float v1, float v2)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform2f(location, v1, v2);
-    return this;
 }
 
-Shader* Shader::set(const String& name, double v1, double v2)
+void Shader::set(const char* name, double v1, double v2)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform2f(location, v1, v2);
-    return this;
 }
 
-Shader* Shader::set(const String& name, int v1, int v2, int v3)
+void Shader::set(const char* name, int v1, int v2, int v3)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform3i(location, v1, v2, v3);
-    return this;
 }
 
-Shader* Shader::set(const String& name, float v1, float v2, float v3)
+void Shader::set(const char* name, float v1, float v2, float v3)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform3f(location, v1, v2, v3);
-    return this;
 }
 
-Shader* Shader::set(const String& name, double v1, double v2, double v3)
+void Shader::set(const char* name, double v1, double v2, double v3)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform3f(location, v1, v2, v3);
-    return this;
 }
 
-Shader* Shader::set(const String& name, int v1, int v2, int v3, int v4)
+void Shader::set(const char* name, int v1, int v2, int v3, int v4)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform4i(location, v1, v2, v3, v4);
-    return this;
 }
 
-Shader* Shader::set(const String& name, float v1, float v2, float v3, float v4)
+void Shader::set(const char* name, float v1, float v2, float v3, float v4)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform4f(location, v1, v2, v3, v4);
-    return this;
 }
 
-Shader* Shader::set(const String& name, double v1, double v2, double v3, double v4)
+void Shader::set(const char* name, double v1, double v2, double v3, double v4)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniform4f(location, v1, v2, v3, v4);
-    return this;
 }
 
-Shader* Shader::set(const String& name, Mat3& v, bool trans)
+void Shader::set(const char* name, Mat3& v, bool trans)
 {
-    int location = glGetUniformLocation(this->_data->id, name.data());
-    if(location == -1)
-        pWarning(u8"%s uniform %s 未找到!", this->_data->getResPath().data(), name.data());
-    else
+    int location = glGetUniformLocation(this->_data->id, name);
+    if(location != -1)
         glUniformMatrix3fv(location, 1, (trans ? GL_TRUE : GL_FALSE), &(v[0][0]));
-    return this;
 }
 
-Shader* Shader::set(const String& name, const Vec2& v)
+void Shader::set(const char* name, const Vec2& v)
 {
-    return this->set(name, v.x, v.y);
+    this->set(name, v.x, v.y);
 }
 
-Shader* Shader::set(const String& name, const Color& v)
+void Shader::set(const char* name, const Color& v)
 {
-    return this->set(name, v.r, v.g, v.b, v.a);
+    this->set(name, v.r, v.g, v.b, v.a);
 }

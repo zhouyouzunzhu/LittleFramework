@@ -3,6 +3,7 @@
 
 void CallbackError(int errorCode, const char* errorStr)
 {
+    pErr(errorStr);
     if(Framework->callbackError)
         Framework->callbackError(errorCode, errorStr);
 }
@@ -22,6 +23,11 @@ void CallbackKey(GLFWwindow* window, int key, int scancode, int action, int mods
 
 void CallbackChar(GLFWwindow* window, unsigned int c)
 {
+}
+
+void CallbackWindowSize(GLFWwindow* window, int w, int h)
+{
+    glViewport(0, 0, w, h);
 }
 
 bool _WindowFramework::initGL()
@@ -75,6 +81,10 @@ bool _WindowFramework::initGL()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // 清空色
+    const Color& col = this->_config->backgroundColor;
+    glClearColor(col.r, col.g, col.b, col.a);
+
     this->_window = window;
     return true;
 }
@@ -90,12 +100,14 @@ void _WindowFramework::installCallback(bool isEnable)
         glfwSetScrollCallback(this->_window, CallbackScroll);
         glfwSetKeyCallback(this->_window, CallbackKey);
         glfwSetCharCallback(this->_window, CallbackChar);
+        glfwSetFramebufferSizeCallback(this->_window, CallbackWindowSize);
     }else
     {
         glfwSetMouseButtonCallback(this->_window, nullptr);
         glfwSetScrollCallback(this->_window, nullptr);
         glfwSetKeyCallback(this->_window, nullptr);
         glfwSetCharCallback(this->_window, nullptr);
+        glfwSetFramebufferSizeCallback(this->_window, nullptr);
     }
 }
 
@@ -126,17 +138,7 @@ void _WindowFramework::newFrame()
 {
     glfwSwapBuffers(this->_window);
     glfwPollEvents();
-
-    int displayW, displayH;
-    glfwGetFramebufferSize(this->_window, &displayW, &displayH);
-    glViewport(0, 0, displayW, displayH);
-
-    const Color& col = this->_config->backgroundColor;
-    glClearColor(col.r, col.g, col.b, col.a);
     glClear(GL_COLOR_BUFFER_BIT);
-
-    if(this->callbackOnFrame)
-        this->callbackOnFrame();
 }
 
 void _WindowFramework::quit()

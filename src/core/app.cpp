@@ -33,7 +33,10 @@ void App::realLoop()
         return;
     
     while(!Framework->isShouldClose())
+    {
         Framework->newFrame();
+        this->realNewFrame();
+    }
 }
 
 void App::realNewFrame()
@@ -69,7 +72,6 @@ void App::initFramework()
     if(this->_isFrameworkInited)
         return;
     
-    Framework->callbackOnFrame = std::bind(&App::realNewFrame, this);
     Framework->changeConfig(&this->_appConfig->window);
     this->_isFrameworkInited = Framework->isInited();
 }

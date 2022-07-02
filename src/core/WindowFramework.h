@@ -15,7 +15,6 @@ private:
 
 public:
     std::function<void(int,const String&)> callbackError;
-    std::function<void()> callbackOnFrame;
 
 
 private:
