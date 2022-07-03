@@ -15,8 +15,8 @@ void main()
 {
     vec3 pos = model * vec3(inputVertices, 1.0f);
 
-    pos.x = pos.x + sin(pos.y * 2.0f + time * 3.0f) * 4.0f;
-    pos.y = pos.y + sin(time * 2.0f) * 2.0f;
+    // pos.x = pos.x + sin(pos.y * 2.0f + time * 3.0f) * 4.0f;
+    // pos.y = pos.y + sin(time * 2.0f) * 2.0f;
 
     gl_Position.xyz = projection * pos;
     gl_Position.z = 0.0f;

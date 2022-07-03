@@ -33,6 +33,6 @@ public:
 
     // 扩展
     void set(const char* name, const Vec2& v);
-    void set(const char* name, Mat3& v, bool trans = false);
+    void set(const char* name, const Mat3& v, bool trans = false);
     void set(const char* name, const Color& v);
 };

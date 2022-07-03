@@ -7,6 +7,9 @@
 
 #include "core/WindowFramework.h"
 
+
+#include "core/Transform.h"
+
 struct DrawVert
 {
     Vec2 pos;
@@ -20,6 +23,9 @@ class TestApp : public App
 protected:
     Renderer* renderer;
     Texture* texture;
+
+    Transform a;
+    Transform b;
 
     virtual void onStart(){
         renderer = assets->getObj<Renderer>(u8"res/shaders/test.shader");
@@ -49,20 +55,38 @@ protected:
 
         // 设置uniform
         renderer->set("projection", Math->ortho(Vec2(800.0f, 600.0f)));
-        renderer->set("model", Math->transform(Vec2(200.0f, 200.0f), texture->getSize(), 0.0f));
         renderer->useTexture("texture0", texture);
 
         // 更新要渲染的数据和索引
         renderer->updateData(vtxList.size(), &vtxList[0]);
         renderer->updateIndex(indexList.size(), &indexList[0]);
+
+        a.setSize(texture->getSize());
+        a.setPosition(300.0f, 400.0f);
+        a.addChild(&b);
+
+        b.setSize(texture->getSize());
+        b.setPosition(100.0f, 0.0f);
     }
 
     virtual void onFrame(){
+        static double lastTime = 0.0;
+        double currentTime = Framework->getTime();
+        double dt = currentTime - lastTime;
+        lastTime = currentTime;
 
         // 激活并渲染
         renderer->active();
-        renderer->set("time", Framework->getTime());
-        renderer->draw();
+
+        {
+            a.rotate(30.0f * dt);
+            renderer->set("model", a.worldMat);
+            renderer->draw();
+        }
+        {
+            renderer->set("model", b.worldMat);
+            renderer->draw();
+        }
     }
 
     virtual void onExit(){

@@ -357,7 +357,7 @@ void Mat3::transpose()
 }
 Mat3 Mat3::reversal() const
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp.v[0][0] = v[1][1] * v[2][2] - v[1][2] * v[2][1];
     temp.v[0][1] = v[0][2] * v[2][1] - v[0][1] * v[2][2];
     temp.v[0][2] = v[0][1] * v[1][2] - v[0][2] * v[1][1];
@@ -577,9 +577,9 @@ void _Math::init()
     easings[Easing::Type::inElastic] = easing_inElastic;
     easings[Easing::Type::outElastic] = easing_outElastic;
 }
-Mat3 _Math::ortho(const Vec2 &size)
+const Mat3& _Math::ortho(const Vec2 &size)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = 2.0f / size.x;
     temp[1][1] = 2.0f / size.y;
     temp[2][2] = 1.0f;
@@ -588,9 +588,9 @@ Mat3 _Math::ortho(const Vec2 &size)
     temp[2][1] = -1.0f;
     return temp;
 }
-Mat3 _Math::ortho(const Rect &area)
+const Mat3& _Math::ortho(const Rect &area)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = 2.0f / (area.maxPos.x - area.minPos.x);
     temp[1][1] = 2.0f / (area.maxPos.y - area.minPos.y);
     temp[2][2] = 1.0f;
@@ -599,91 +599,91 @@ Mat3 _Math::ortho(const Rect &area)
     temp[2][1] = -(area.maxPos.y + area.minPos.y) / (area.maxPos.y - area.minPos.y);
     return temp;
 }
-Mat3 _Math::translate(const Vec2 &offset)
+const Mat3& _Math::translate(const Vec2 &offset)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[2][0] = offset.x;
     temp[2][1] = offset.y;
     return temp;
 }
-Mat3 _Math::translate(const Mat3 &mat, const Vec2 &offset)
+const Mat3& _Math::translate(const Mat3 &mat, const Vec2 &offset)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[2][0] = offset.x;
     temp[2][1] = offset.y;
     return mat * temp;
 }
-Mat3 _Math::rotate(float angle)
+const Mat3& _Math::rotate(float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
     temp[0][1] = std::sin(angleToRadian(angle));
     temp[1][0] = -temp[0][1];
     temp[1][1] = temp[0][0];
     return temp;
 }
-Mat3 _Math::rotate(const Mat3 &mat, float angle)
+const Mat3& _Math::rotate(const Mat3 &mat, float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
     temp[0][1] = std::sin(angleToRadian(angle));
     temp[1][0] = -temp[0][1];
     temp[1][1] = temp[0][0];
     return mat * temp;
 }
-Mat3 _Math::rotateX(float angle)
+const Mat3& _Math::rotateX(float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[1][1] = std::cos(angleToRadian(angle));
     temp[1][2] = std::sin(angleToRadian(angle));
     temp[2][1] = -temp[1][2];
     temp[2][2] = temp[1][1];
     return temp;
 }
-Mat3 _Math::rotateX(const Mat3 &mat, float angle)
+const Mat3& _Math::rotateX(const Mat3 &mat, float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[1][1] = std::cos(angleToRadian(angle));
     temp[1][2] = std::sin(angleToRadian(angle));
     temp[2][1] = -temp[1][2];
     temp[2][2] = temp[1][1];
     return mat * temp;
 }
-Mat3 _Math::rotateY(float angle)
+const Mat3& _Math::rotateY(float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
     temp[2][0] = std::sin(angleToRadian(angle));
     temp[0][2] = -temp[2][0];
     temp[2][2] = temp[0][0];
     return temp;
 }
-Mat3 _Math::rotateY(const Mat3 &mat, float angle)
+const Mat3& _Math::rotateY(const Mat3 &mat, float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
     temp[2][0] = std::sin(angleToRadian(angle));
     temp[0][2] = -temp[2][0];
     temp[2][2] = temp[0][0];
     return mat * temp;
 }
-Mat3 _Math::scale(const Vec2 &v)
+const Mat3& _Math::scale(const Vec2 &v)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = v.x;
     temp[1][1] = v.y;
     return temp;
 }
-Mat3 _Math::scale(const Mat3 &mat, const Vec2 &offset)
+const Mat3& _Math::scale(const Mat3 &mat, const Vec2 &offset)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp[0][0] = offset.x;
     temp[1][1] = offset.y;
     return mat * temp;
 }
-Mat3 _Math::transform(const Vec2 &pos, const Vec2 &scale, float angle)
+const Mat3& _Math::transform(const Vec2 &pos, const Vec2 &scale, float angle)
 {
-    Mat3 temp;
+    static Mat3 temp;
     float ca = std::cos(angleToRadian(angle));
     float sa = std::sin(angleToRadian(angle));
 
@@ -697,9 +697,9 @@ Mat3 _Math::transform(const Vec2 &pos, const Vec2 &scale, float angle)
 
     return temp;
 }
-Mat3 _Math::complexTrans(const Mat3 &mat, const Vec2 &size, const Vec2 &anchor)
+const Mat3& _Math::complexTrans(const Mat3 &mat, const Vec2 &size, const Vec2 &anchor)
 {
-    Mat3 temp;
+    static Mat3 temp;
     temp.v[0][0] = size.x;
     temp.v[1][1] = size.y;
     temp.v[2][0] = size.x * (0.5f - anchor.x);
@@ -712,7 +712,7 @@ Vec2 _Math::linear(const Vec2 &begin, const Vec2 &end, float v) { return begin +
 
 Vec2 bezier(float t, const Vec2 &p1, const Vec2 &p2, const Vec2 &p3)
 {
-    Vec2 tp;
+    static Vec2 tp;
     tp.x = pow((1 - t), 2) * p1.x + 2 * t * (1 - t) * p2.x + pow(t, 2) * p3.x;
     tp.y = pow((1 - t), 2) * p1.y + 2 * t * (1 - t) * p2.y + pow(t, 2) * p3.y;
     return tp;
@@ -720,7 +720,7 @@ Vec2 bezier(float t, const Vec2 &p1, const Vec2 &p2, const Vec2 &p3)
 
 Vec2 bezier(float t, const Vec2 &p1, const Vec2 &p2, const Vec2 &p3, const Vec2 &p4)
 {
-    Vec2 tp;
+    static Vec2 tp;
     tp.x = pow((1 - t), 3) * p1.x + pow((1 - t), 2) * 3 * t * p2.x + pow(t, 2) * (1 - t) * 3 * p3.x + pow(t, 3) * p4.x;
     tp.y = pow((1 - t), 3) * p1.y + pow((1 - t), 2) * 3 * t * p2.y + pow(t, 2) * (1 - t) * 3 * p3.y + pow(t, 3) * p4.y;
     return tp;
@@ -728,7 +728,7 @@ Vec2 bezier(float t, const Vec2 &p1, const Vec2 &p2, const Vec2 &p3, const Vec2 
 
 Vec2 circle(float t, const Vec2 &c, float r, float fr, float rd)
 {
-    Vec2 p;
+    static Vec2 p;
     p.x = c.x + r * cos(fr + rd * t);
     p.y = c.y + r * sin(fr + rd * t);
     return p;
@@ -739,7 +739,7 @@ float _Math::random(float min, float max) { return min + random() * (max - min);
 Vec2 _Math::randomVec2(const Vec2 &min, const Vec2 &max) { return Vec2(random(min.x, max.x), random(min.y, max.y)); }
 Color _Math::randomColor(const Color &min, const Color &max)
 {
-    Color col;
+    static Color col;
     col.r = random(min.r, max.r);
     col.g = random(min.g, max.g);
     col.b = random(min.b, max.b);

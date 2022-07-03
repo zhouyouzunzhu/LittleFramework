@@ -95,11 +95,11 @@ void Shader::set(const char* name, double v1, double v2, double v3, double v4)
         glUniform4f(location, v1, v2, v3, v4);
 }
 
-void Shader::set(const char* name, Mat3& v, bool trans)
+void Shader::set(const char* name, const Mat3& v, bool trans)
 {
     int location = glGetUniformLocation(this->_data->id, name);
     if(location != -1)
-        glUniformMatrix3fv(location, 1, (trans ? GL_TRUE : GL_FALSE), &(v[0][0]));
+        glUniformMatrix3fv(location, 1, (trans ? GL_TRUE : GL_FALSE), &(v.v[0][0]));
 }
 
 void Shader::set(const char* name, const Vec2& v)
