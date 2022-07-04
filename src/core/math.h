@@ -236,20 +236,20 @@ private:
 
 public:
     // 矩阵计算
-    const Mat3& ortho(const Vec2& size);
-    const Mat3& ortho(const Rect& area);
-    const Mat3& translate(const Vec2& offset);
-    const Mat3& translate(const Mat3& mat, const Vec2& offset);
-    const Mat3& rotate(float angle);
-    const Mat3& rotate(const Mat3& mat, float angle);
-    const Mat3& rotateX(float angle);
-    const Mat3& rotateX(const Mat3& mat, float angle);
-    const Mat3& rotateY(float angle);
-    const Mat3& rotateY(const Mat3& mat, float angle);
-    const Mat3& scale(const Vec2& v);
-    const Mat3& scale(const Mat3& mat, const Vec2& offset);
-    const Mat3& transform(const Vec2& pos, const Vec2& scale, float angle);
-    const Mat3& complexTrans(const Mat3& mat, const Vec2& size, const Vec2& anchor);
+    Mat3 ortho(const Vec2& size);
+    Mat3 ortho(const Rect& area);
+    Mat3 translate(const Vec2& offset);
+    Mat3 translate(const Mat3& mat, const Vec2& offset);
+    Mat3 rotate(float angle);
+    Mat3 rotate(const Mat3& mat, float angle);
+    Mat3 rotateX(float angle);
+    Mat3 rotateX(const Mat3& mat, float angle);
+    Mat3 rotateY(float angle);
+    Mat3 rotateY(const Mat3& mat, float angle);
+    Mat3 scale(const Vec2& v);
+    Mat3 scale(const Mat3& mat, const Vec2& offset);
+    Mat3 transform(const Vec2& pos, const Vec2& scale, float angle);
+    Mat3 complexTrans(const Mat3& mat, const Vec2& size, const Vec2& anchor);
 
     // 缓动函数
     float easing(float value, const Easing::Type& type);

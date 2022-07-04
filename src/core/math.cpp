@@ -577,7 +577,7 @@ void _Math::init()
     easings[Easing::Type::inElastic] = easing_inElastic;
     easings[Easing::Type::outElastic] = easing_outElastic;
 }
-const Mat3& _Math::ortho(const Vec2 &size)
+Mat3 _Math::ortho(const Vec2 &size)
 {
     static Mat3 temp;
     temp[0][0] = 2.0f / size.x;
@@ -588,7 +588,7 @@ const Mat3& _Math::ortho(const Vec2 &size)
     temp[2][1] = -1.0f;
     return temp;
 }
-const Mat3& _Math::ortho(const Rect &area)
+Mat3 _Math::ortho(const Rect &area)
 {
     static Mat3 temp;
     temp[0][0] = 2.0f / (area.maxPos.x - area.minPos.x);
@@ -599,21 +599,21 @@ const Mat3& _Math::ortho(const Rect &area)
     temp[2][1] = -(area.maxPos.y + area.minPos.y) / (area.maxPos.y - area.minPos.y);
     return temp;
 }
-const Mat3& _Math::translate(const Vec2 &offset)
+Mat3 _Math::translate(const Vec2 &offset)
 {
     static Mat3 temp;
     temp[2][0] = offset.x;
     temp[2][1] = offset.y;
     return temp;
 }
-const Mat3& _Math::translate(const Mat3 &mat, const Vec2 &offset)
+Mat3 _Math::translate(const Mat3 &mat, const Vec2 &offset)
 {
     static Mat3 temp;
     temp[2][0] = offset.x;
     temp[2][1] = offset.y;
     return mat * temp;
 }
-const Mat3& _Math::rotate(float angle)
+Mat3 _Math::rotate(float angle)
 {
     static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
@@ -622,7 +622,7 @@ const Mat3& _Math::rotate(float angle)
     temp[1][1] = temp[0][0];
     return temp;
 }
-const Mat3& _Math::rotate(const Mat3 &mat, float angle)
+Mat3 _Math::rotate(const Mat3 &mat, float angle)
 {
     static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
@@ -631,7 +631,7 @@ const Mat3& _Math::rotate(const Mat3 &mat, float angle)
     temp[1][1] = temp[0][0];
     return mat * temp;
 }
-const Mat3& _Math::rotateX(float angle)
+Mat3 _Math::rotateX(float angle)
 {
     static Mat3 temp;
     temp[1][1] = std::cos(angleToRadian(angle));
@@ -640,7 +640,7 @@ const Mat3& _Math::rotateX(float angle)
     temp[2][2] = temp[1][1];
     return temp;
 }
-const Mat3& _Math::rotateX(const Mat3 &mat, float angle)
+Mat3 _Math::rotateX(const Mat3 &mat, float angle)
 {
     static Mat3 temp;
     temp[1][1] = std::cos(angleToRadian(angle));
@@ -649,7 +649,7 @@ const Mat3& _Math::rotateX(const Mat3 &mat, float angle)
     temp[2][2] = temp[1][1];
     return mat * temp;
 }
-const Mat3& _Math::rotateY(float angle)
+Mat3 _Math::rotateY(float angle)
 {
     static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
@@ -658,7 +658,7 @@ const Mat3& _Math::rotateY(float angle)
     temp[2][2] = temp[0][0];
     return temp;
 }
-const Mat3& _Math::rotateY(const Mat3 &mat, float angle)
+Mat3 _Math::rotateY(const Mat3 &mat, float angle)
 {
     static Mat3 temp;
     temp[0][0] = std::cos(angleToRadian(angle));
@@ -667,21 +667,21 @@ const Mat3& _Math::rotateY(const Mat3 &mat, float angle)
     temp[2][2] = temp[0][0];
     return mat * temp;
 }
-const Mat3& _Math::scale(const Vec2 &v)
+Mat3 _Math::scale(const Vec2 &v)
 {
     static Mat3 temp;
     temp[0][0] = v.x;
     temp[1][1] = v.y;
     return temp;
 }
-const Mat3& _Math::scale(const Mat3 &mat, const Vec2 &offset)
+Mat3 _Math::scale(const Mat3 &mat, const Vec2 &offset)
 {
     static Mat3 temp;
     temp[0][0] = offset.x;
     temp[1][1] = offset.y;
     return mat * temp;
 }
-const Mat3& _Math::transform(const Vec2 &pos, const Vec2 &scale, float angle)
+Mat3 _Math::transform(const Vec2 &pos, const Vec2 &scale, float angle)
 {
     static Mat3 temp;
     float ca = std::cos(angleToRadian(angle));
@@ -697,7 +697,7 @@ const Mat3& _Math::transform(const Vec2 &pos, const Vec2 &scale, float angle)
 
     return temp;
 }
-const Mat3& _Math::complexTrans(const Mat3 &mat, const Vec2 &size, const Vec2 &anchor)
+Mat3 _Math::complexTrans(const Mat3 &mat, const Vec2 &size, const Vec2 &anchor)
 {
     static Mat3 temp;
     temp.v[0][0] = size.x;
