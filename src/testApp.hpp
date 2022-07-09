@@ -10,16 +10,16 @@
 
 #include "core/Transform.h"
 
-struct DrawVert
-{
-    Vec2 pos;
-    Vec2 coord;
-    Color color;
-};
-
 
 class TestApp : public App
 {
+    struct DrawVert
+    {
+        Vec2 pos;
+        Vec2 coord;
+        Color color;
+    };
+
 protected:
     Renderer* renderer;
     Texture* texture;
