@@ -1,7 +1,14 @@
 ﻿#include "WindowFramework.h"
 
+// 按键状态
+static char InputKeys[KeysCount] = { 0 };
+static bool IsNeedUpdateKeys = false;
 
-void CallbackError(int errorCode, const char* errorStr)
+// 按下或释放的特殊状态
+static const char SpecialStatus = InputStatus::Press | InputStatus::Release;
+
+
+static void CallbackError(int errorCode, const char* errorStr)
 {
     pErr(errorStr);
     if(Framework->callbackError)
@@ -9,26 +16,106 @@ void CallbackError(int errorCode, const char* errorStr)
 }
 
 
-void CallbackMouseButton(GLFWwindow* window, int button, int action, int mods)
+static void CallbackMouseButton(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button >= 0 && button <= KeysCount)
+    {
+        if (action == GLFW_PRESS)
+        {
+            AddBit(InputKeys[button], InputStatus::Press);
+            AddBit(InputKeys[button], InputStatus::Keep);
+            DelBit(InputKeys[button], InputStatus::Release);
+            IsNeedUpdateKeys = true;
+        }
+        else if (action == GLFW_RELEASE)
+        {
+            DelBit(InputKeys[button], InputStatus::Press);
+            DelBit(InputKeys[button], InputStatus::Keep);
+            AddBit(InputKeys[button], InputStatus::Release);
+            IsNeedUpdateKeys = true;
+        }
+    }
+}
+
+static void CallbackScroll(GLFWwindow* window, double xoffset, double yoffset)
+{
+    static float* roll = &(Framework->roll);
+    *roll = (float)yoffset;
+}
+
+static void CallbackKey(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key >= 0 && key <= KeysCount)
+    {
+        if (action == GLFW_PRESS)
+        {
+            AddBit(InputKeys[key], InputStatus::Press);
+            AddBit(InputKeys[key], InputStatus::Keep);
+            DelBit(InputKeys[key], InputStatus::Release);
+            IsNeedUpdateKeys = true;
+        }
+        else if (action == GLFW_RELEASE)
+        {
+            DelBit(InputKeys[key], InputStatus::Press);
+            DelBit(InputKeys[key], InputStatus::Keep);
+            AddBit(InputKeys[key], InputStatus::Release);
+            IsNeedUpdateKeys = true;
+        }
+    }
+}
+
+static void CallbackChar(GLFWwindow* window, unsigned int c)
 {
 }
 
-void CallbackScroll(GLFWwindow* window, double xoffset, double yoffset)
+void CallbackCursorPos(GLFWwindow* window, double xoffset, double yoffset)
 {
-}
+    static Vec2* currenPos = &(Framework->cursorPos);
+    static Vec2* lastPos = &(Framework->lastCursorPos);
+    static Vec2* deltaPos = &(Framework->deltaCursorPos);
+    static _WindowFramework* framework = Framework;
 
-void CallbackKey(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-}
+    lastPos->x = currenPos->x;
+    lastPos->y = currenPos->y;
 
-void CallbackChar(GLFWwindow* window, unsigned int c)
-{
+    currenPos->x = (float)xoffset;
+    currenPos->y = framework->config->size.y - (float)yoffset;
+
+    deltaPos->x = currenPos->x - lastPos->x;
+    deltaPos->y = currenPos->y - lastPos->y;
 }
 
 void CallbackWindowSize(GLFWwindow* window, int w, int h)
 {
     glViewport(0, 0, w, h);
 }
+
+
+void UpdateKeysStatus()
+{
+    static Vec2* deltaCursorPos = &(Framework->deltaCursorPos);
+    static float* roll = &(Framework->roll);
+
+    *roll = 0.0f;
+    deltaCursorPos->x = 0.0f;
+    deltaCursorPos->y = 0.0f;
+
+
+    if(IsNeedUpdateKeys)
+    {
+        IsNeedUpdateKeys = false;
+
+        static int i = 0;
+        for (i = 0; i < KeysCount; ++i)
+        {
+            if (HasBit(InputKeys[i], InputStatus::Keep))
+                DelBit(InputKeys[i], SpecialStatus);
+            else
+                InputKeys[i] = InputStatus::NoAction;
+        }
+    }
+}
+
 
 bool _WindowFramework::initGL()
 {
@@ -101,6 +188,7 @@ void _WindowFramework::installCallback(bool isEnable)
         glfwSetKeyCallback(this->_window, CallbackKey);
         glfwSetCharCallback(this->_window, CallbackChar);
         glfwSetFramebufferSizeCallback(this->_window, CallbackWindowSize);
+        glfwSetCursorPosCallback(this->_window, CallbackCursorPos);
     }else
     {
         glfwSetMouseButtonCallback(this->_window, nullptr);
@@ -118,6 +206,7 @@ void _WindowFramework::changeConfig(WindowConfig* config)
     
     this->quit();
     this->_config = config;
+    this->config = this->_config;
     this->init();
 }
 
@@ -136,6 +225,16 @@ void _WindowFramework::init()
 
 void _WindowFramework::newFrame()
 {
+    // dt
+    static double lastTime = 0;
+    this->totalTime = glfwGetTime();
+    dt = this->totalTime - lastTime;
+    lastTime = this->totalTime;
+
+    // input
+    UpdateKeysStatus();
+
+    // gl
     glfwSwapBuffers(this->_window);
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
@@ -164,7 +263,23 @@ bool _WindowFramework::isShouldClose()
     return glfwWindowShouldClose(this->_window);
 }
 
-double _WindowFramework::getTime()const
+bool _WindowFramework::isKeyPress(Keys key)
 {
-    return glfwGetTime();
+    return HasBit(InputKeys[key], InputStatus::Press);
 }
+
+bool _WindowFramework::isKeyRelease(Keys key)
+{
+    return HasBit(InputKeys[key], InputStatus::Release);
+}
+
+bool _WindowFramework::isKeyKeep(Keys key)
+{
+    return HasBit(InputKeys[key], InputStatus::Keep);
+}
+
+bool _WindowFramework::KeyStatus(Keys key, InputStatus status)
+{
+    return HasBit(InputKeys[key], status);
+}
+

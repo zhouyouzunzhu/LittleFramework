@@ -25,7 +25,6 @@ protected:
     Texture* texture;
 
     Transform a;
-    Transform b;
 
     virtual void onStart(){
         renderer = assets->getObj<Renderer>(u8"res/shaders/test.shader");
@@ -63,30 +62,15 @@ protected:
 
         a.setSize(texture->getSize());
         a.setPosition(300.0f, 400.0f);
-        a.addChild(&b);
-
-        b.setSize(texture->getSize());
-        b.setPosition(100.0f, 0.0f);
     }
 
     virtual void onFrame(){
-        static double lastTime = 0.0;
-        double currentTime = Framework->getTime();
-        double dt = currentTime - lastTime;
-        lastTime = currentTime;
+        a.setPosition(Framework->cursorPos);
 
         // 激活并渲染
         renderer->active();
-
-        {
-            a.rotate(30.0f * dt);
-            renderer->set("model", a.worldMat);
-            renderer->draw();
-        }
-        {
-            renderer->set("model", b.worldMat);
-            renderer->draw();
-        }
+        renderer->set("model", a.worldMat);
+        renderer->draw();
     }
 
     virtual void onExit(){
