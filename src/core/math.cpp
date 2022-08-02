@@ -102,6 +102,10 @@ Vec2 Vec2::normal() const
     t.set(x * sign, y * sign);
     return t;
 }
+Vec2 Vec2::abs() const
+{
+    return Vec2(std::fabs(x), std::fabs(y));
+}
 
 Vec3::Vec3() : x(0.0f), y(0.0f), z(0.0f) {}
 Vec3::Vec3(float num) : x(num), y(num), z(num) {}
@@ -200,6 +204,11 @@ Vec3 Vec3::normal() const
     sign = 1.0f / sign;
     t.set(x * sign, y * sign, z * sign);
     return t;
+}
+
+Vec3 Vec3::abs() const
+{
+    return Vec3(std::fabs(x), std::fabs(y), std::fabs(z));
 }
 
 Mat3::Mat3()
@@ -373,6 +382,21 @@ Mat3 Mat3::reversal() const
                   v[1][0] * (v[0][1] * v[2][2] - v[0][2] * v[2][1]) +
                   v[2][0] * (v[0][1] * v[1][2] - v[0][2] * v[1][1]);
     return temp / deter;
+}
+
+Mat3 Mat3::abs() const
+{
+    static Mat3 temp;
+    temp.v[0][0] = std::fabs(v[0][0]);
+    temp.v[0][1] = std::fabs(v[0][1]);
+    temp.v[0][2] = std::fabs(v[0][2]);
+    temp.v[1][0] = std::fabs(v[1][0]);
+    temp.v[1][1] = std::fabs(v[1][1]);
+    temp.v[1][2] = std::fabs(v[1][2]);
+    temp.v[2][0] = std::fabs(v[2][0]);
+    temp.v[2][1] = std::fabs(v[2][1]);
+    temp.v[2][2] = std::fabs(v[2][2]);
+    return temp;
 }
 
 Rect::Rect() : minPos(0.0f), maxPos(1.0f) {}

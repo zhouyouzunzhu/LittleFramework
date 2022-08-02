@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Inst.h"
+#include <cmath>
 
 // pi
 #define Math_PI 3.1415926f
@@ -97,6 +98,7 @@ public:
     Vec2 skew() const;
     float angle() const;
     Vec2 normal() const;
+    Vec2 abs() const;
 
 public:
     float x, y;
@@ -141,6 +143,7 @@ public:
     float dot(float x, float y, float z) const;
 
     Vec3 normal() const;
+    Vec3 abs() const;
 
 public:
     float x, y, z;
@@ -166,6 +169,7 @@ public:
 
     void transpose();
     Mat3 reversal() const;
+    Mat3 abs() const;
 
 public:
     float v[3][3];
